@@ -1,3 +1,4 @@
+ 
 version: '3.7'
 
 services:
@@ -33,6 +34,8 @@ services:
       - hadoop
     depends_on:
       - namenode
+    ports:
+      - "50075:50075"
 
   # Hadoop slave 2
   datanode2:
@@ -48,6 +51,8 @@ services:
       - hadoop
     depends_on:
       - namenode
+    ports:
+      - "50074:50074"
 
   resourcemanager:
     restart: always
@@ -153,32 +158,34 @@ services:
   # HIVE
   hive-server:
     image: bde2020/hive:2.3.2-postgresql-metastore
-    container_name: hiveserver
     env_file:
-      - ./hadoop.env
+      - ./hadoop-hive.env
     environment:
       HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore/metastore"
       SERVICE_PRECONDITION: "hive-metastore:9083"
+    ports:
+      - "10000:10000"
     networks:
       - hadoop
+
 
   #add datanode2:9864 to service precondition
   hive-metastore:
-    container_name: hivemetastore
     image: bde2020/hive:2.3.2-postgresql-metastore
     env_file:
-      - ./hadoop.env
+      - ./hadoop-hive.env
     command: /opt/hive/bin/hive --service metastore
-    networks:
-      - hadoop
     environment:
       SERVICE_PRECONDITION: "namenode:9870 datanode1:9864 datanode2:9864 hive-metastore-postgresql:5432"
+    ports:
+      - "9083:9083"
+    networks:
+      - hadoop
 
   hive-metastore-postgresql:
-    container_name: hivedb
-    image: bde2020/hive-metastore-postgresql:2.3.0
-    volumes:
-      - hive-metastore:/var/lib/postgresql/data
+    image: bde2020/hive-metastore-postgresql:2.3.0 
+    ports:
+      - "5433:5432"
     networks:
       - hadoop
 
@@ -227,6 +234,7 @@ services:
       - ./hadoop.env
     networks:
       - hadoop
+
   # Spark notebooks
   jupyter-spark:
     # To see all running servers in this container, execute
@@ -259,61 +267,6 @@ services:
     networks:
       - hadoop
 
-  # Mongo
-  mongo:
-    container_name: mongo
-    image: mongo:4.4
-    restart: always
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=kevinsuedmersen
-      - MONGO_INITDB_ROOT_PASSWORD=secret
-    volumes:
-      - mongo_data:/data/db
-      - ./mongo/mongo-data:/mongo-data
-    ports:
-      - 27019:27017
-    networks:
-      - hadoop
-
-  mongoexpress:
-    container_name: mongoexpress
-    image: mongo-express:0.54
-    restart: always
-    ports:
-      - 8091:8081
-    environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=kevinsuedmersen
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=secret
-    networks:
-      - hadoop
-    depends_on:
-      - mongo
-
-  # Superset   
-  superset:
-    container_name: superset
-    image: apache/superset:latest
-    command: bash -c "superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin && superset db upgrade && superset load_examples && superset init && /usr/bin/docker-entrypoint.sh"
-    ports:
-      - 8079:8088
-    networks:
-      - hadoop
-
-  timescaledb:
-    build: "docker/postgres"
-    ports:
-      - "7432:5432"
-    environment:
-      POSTGRES_MULTIPLE_DATABASES: "mlflow"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-      MAX_CONNECTIONS: 100
-      SHARED_BUFFERS: "1GB"
-    volumes:
-      - postgres-db-volume:/var/lib/postgresql/data
-    networks:
-      - hadoop
- 
   portainer:
     image: portainer/portainer-ce:2.9.2
     restart: unless-stopped
@@ -340,8 +293,6 @@ services:
       - ./jupyter-tensorflow/work:/home/jovyan/work
     environment:
       - TINI_SUBREAPER=true
-      - MLFLOW_TRACKING_URI="http://mlflow:5000"
-      - MLFLOW_S3_ENDPOINT_URL="http://minio:9000"
       - GRANT_SUDO=yes
     env_file:
       - ./hadoop.env
@@ -371,8 +322,5 @@ volumes:
  # hadoop-datanode-3:
   hadoop-historyserver:
   hue-db:
-  hive-metastore:
-  mongo_data:
-  superset:
   postgres-db-volume:
   dataportainer:
