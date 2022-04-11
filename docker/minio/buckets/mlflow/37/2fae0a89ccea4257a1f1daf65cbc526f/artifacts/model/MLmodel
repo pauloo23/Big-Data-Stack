@@ -1,0 +1,12 @@
+artifact_path: model
+flavors:
+  h2o:
+    data: model.h2o
+    h2o_version: 3.32.1.7
+  python_function:
+    data: model.h2o
+    env: conda.yaml
+    loader_module: mlflow.h2o
+    python_version: 3.7.10
+run_id: 2fae0a89ccea4257a1f1daf65cbc526f
+utc_time_created: '2021-12-06 17:14:20.425268'

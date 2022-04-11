@@ -1,0 +1,15 @@
+artifact_uri: '"http://mlflow:5000"/5/b81d8db916b644bb930916b31d6d72da/artifacts'
+end_time: 1639058580693
+entry_point_name: ''
+experiment_id: '5'
+lifecycle_stage: active
+name: ''
+run_id: b81d8db916b644bb930916b31d6d72da
+run_uuid: b81d8db916b644bb930916b31d6d72da
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1639058554578
+status: 3
+tags: []
+user_id: jovyan

@@ -1,0 +1,4 @@
+artifact_location: '"http://mlflow:5000"/4'
+experiment_id: '4'
+lifecycle_stage: active
+name: provaconceito108

@@ -1,0 +1,36 @@
+# NLP Processing
+nltk
+networkx
+gensim
+
+# NLP Toolkit
+nltk
+tqdm
+spacy
+
+# ML Packages
+keras
+torch
+
+# Spark, PySpark
+findspark
+Flask
+gensim
+langdetect
+networkx
+pyspark
+
+# Graphviz
+pydot
+
+# ONNX tools
+skl2onnx
+tf2onnx
+keras2onnx
+
+# ONNX
+onnx
+onnxmltools
+onnxruntime
+
+rpy2==3.4.5

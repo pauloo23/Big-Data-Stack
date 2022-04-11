@@ -1,0 +1,15 @@
+artifact_uri: '"http://172.16.131.140:5000"/1/94e48a05ee4d434ea48d143e4300f980/artifacts'
+end_time: 1638183235453
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: 94e48a05ee4d434ea48d143e4300f980
+run_uuid: 94e48a05ee4d434ea48d143e4300f980
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1638183167042
+status: 4
+tags: []
+user_id: jovyan

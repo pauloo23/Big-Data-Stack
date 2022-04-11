@@ -1,0 +1,4 @@
+artifact_location: '"http://mlflow:5000"/3'
+experiment_id: '3'
+lifecycle_stage: active
+name: Social NLP Experiments2

@@ -1,0 +1,4 @@
+artifact_location: '"http://172.16.131.140:5000"/2'
+experiment_id: '2'
+lifecycle_stage: active
+name: Social NLP Experiments

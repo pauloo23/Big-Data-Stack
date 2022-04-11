@@ -1,0 +1,16 @@
+channels:
+- conda-forge
+dependencies:
+- python=3.7.10
+- pip
+- pip:
+  - mlflow
+  - cffi==1.14.6
+  - colorama==0.4.4
+  - future==0.18.2
+  - h2o==3.32.1.7
+  - ipykernel==6.4.2
+  - matplotlib==3.4.2
+  - requests==2.25.1
+  - tabulate==0.8.9
+name: mlflow-env

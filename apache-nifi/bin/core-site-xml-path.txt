@@ -1,0 +1,2 @@
+For Hadoop Configuration Resources in PutHDFS:
+/opt/nifi/nifi-current/conf/core-site.xml

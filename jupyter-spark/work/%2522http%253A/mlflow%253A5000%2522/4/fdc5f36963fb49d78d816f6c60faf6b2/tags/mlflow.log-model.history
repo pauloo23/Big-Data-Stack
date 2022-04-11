@@ -1,0 +1,1 @@
+[{"run_id": "fdc5f36963fb49d78d816f6c60faf6b2", "artifact_path": "model", "utc_time_created": "2021-11-29 17:36:34.228685", "flavors": {"python_function": {"loader_module": "mlflow.h2o", "python_version": "3.7.10", "data": "model.h2o", "env": "conda.yaml"}, "h2o": {"h2o_version": "3.32.1.7", "data": "model.h2o"}}}]
