@@ -1,8 +1,0 @@
-[report]
-omit =
-    setup.py
-    dtale/static/**
-    dtale/templates/**
-
-exclude_lines =
-    if __name__ == .__main__.:

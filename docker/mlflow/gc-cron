@@ -1,1 +1,0 @@
-* * * * * mlflow gc --backend-store-uri postgresql+psycopg2://mlflow:mlflow@timescaledb:5432/mlflow >/dev/null 2>&1

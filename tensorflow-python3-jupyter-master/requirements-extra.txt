@@ -1,3 +1,0 @@
-# Bert pre-trained model
-#pytorch-pretrained-bert
-
